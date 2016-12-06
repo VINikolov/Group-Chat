@@ -12,7 +12,6 @@ namespace ChatClient
     public class ChatClient
     {
         public string Name { get; set; }
-        private IPEndPoint endPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3333);//useless
         private TcpClient client;
         private Thread messageReceiver;
         private bool clientClose = false;
@@ -21,13 +20,8 @@ namespace ChatClient
         {
             try
             {
-                client = new TcpClient("127.0.0.1", 3333);//
                 Name = clientName;
-
-                //byte[] clientNameBuffer = Encoding.ASCII.GetBytes(Name);
-                //NetworkStream clientDataStream = client.GetStream();
-                //clientDataStream.Write(clientNameBuffer, 0, clientNameBuffer.Length);
-
+                client = new TcpClient("127.0.0.1", 3333);
                 messageReceiver = new Thread(new ParameterizedThreadStart(ReceiveMessages));
                 messageReceiver.Start(form);
                 form.WriteMessage("Connected to server!");

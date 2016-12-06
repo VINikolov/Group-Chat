@@ -33,27 +33,12 @@ namespace ChatServer
                 try
                 {
                     TcpClient client = server.AcceptTcpClient();
-                    //
-                    //NetworkStream clientDataStream = client.GetStream();
-                    //byte[] buffer = new byte[4096];
-                    //int bytesRead = 0;
-                    //bytesRead = clientDataStream.Read(buffer, 0, 4096);
-                    //ASCIIEncoding encoding = new ASCIIEncoding();
-                    //string clientName = encoding.GetString(buffer, 0, bytesRead);
-                    //
-                    //connectedUsers.Add(clientName, client);
-
-                    //Thread clientThread = new Thread(new ParameterizedThreadStart(ClientCommunicationHandler));
-                    //clientThread.Start(client);
-
-                    //form.AddClient(clientName);
 
                     Thread clientThread = new Thread(() => ClientCommunicationHandler(client, form));
                     clientThread.Start();
                 }
                 catch (Exception)
                 {
-                    //Delegates
                     break;
                 }
             }
@@ -81,8 +66,6 @@ namespace ChatServer
 
                 if (bytesRead == 0)
                 {
-                    //string clientName = connectedUsers.FirstOrDefault(x => x.Value == client).Key;///
-                    //userMessage = clientName + " disconnected from server.";///
                     break;
                 }
 
@@ -96,54 +79,17 @@ namespace ChatServer
                     form.UpdateServerInfo(text);
 
                     SendInitialData(tcpClient, clientName);
-
-                    //byte[] connectMessage = Encoding.ASCII.GetBytes(text);
-                    //int length = text.Length;
-
-                    //SendMessageToAllUsers(connectMessage, length);
-
-                    //StringBuilder connectedUsersSb = new StringBuilder();
-                    //foreach (var item in connectedUsers)
-                    //{
-                    //    connectedUsersSb.Append(item.Key);
-                    //    connectedUsersSb.Append(" ");
-                    //}
-
-                    //string connectedUsersStr = MessageTypes.UpdateMessage.ToString() + " " + connectedUsersSb.ToString();
-                    //byte[] updateUsersMessage = Encoding.ASCII.GetBytes(connectedUsersStr);
-                    //NetworkStream dataStream = tcpClient.GetStream();
-                    //dataStream.Write(updateUsersMessage, 0, connectedUsersStr.Length);
-
-
-                    //string updateMessage = MessageTypes.UpdateMessage.ToString() + " " + clientName;
-                    //byte[] updateMessageBytes = Encoding.ASCII.GetBytes(updateMessage);
-                    //SendMessageToAllUsers(updateMessageBytes, updateMessage.Length);
-                    
+  
                     connectedUsers.Add(clientName, tcpClient);
                 }
                 else if (IsExitMessage(message))
                 {
                     HandleUserDisconnect(clientName, form);
-
-                    //string text = clientName + " has disconnected.";
-                    //form.UpdateServerInfo(text);
-                    //connectedUsers.Remove(clientName);
-
-                    //byte[] disconnectMessage = Encoding.ASCII.GetBytes(text);
-                    //int length = text.Length;
-
-                    //SendMessageToAllUsers(disconnectMessage, length);
-
                     break;
                 }
                 else
                 {
                     SendMessageToAllUsers(buffer, bytesRead);
-                    //foreach (var item in connectedUsers)
-                    //{
-                    //    NetworkStream dataStream = item.Value.GetStream();
-                    //    dataStream.Write(buffer, 0, bytesRead);
-                    //}
                 }
             }
         }
@@ -164,7 +110,7 @@ namespace ChatServer
             }
 
 
-            if (connectedUsersSb.Length > 0)//
+            if (connectedUsersSb.Length > 0)
             {
                 string connectedUsersStr = MessageTypes.UpdateMessage.ToString() + " " + connectedUsersSb.ToString();
                 byte[] updateUsersMessage = Encoding.ASCII.GetBytes(connectedUsersStr);

@@ -40,7 +40,6 @@ namespace ChatServer
 
         public void UpdateServerInfo(string text)
         {
-            //ServerInfo.Items.Add(name + " connected.");
             SetText(text);
         }
 
