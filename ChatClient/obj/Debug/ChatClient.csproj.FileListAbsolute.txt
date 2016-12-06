@@ -1,0 +1,9 @@
+D:\Desktop\Net Project\Chat\Chat\ChatClient\bin\Debug\ChatClient.exe.config
+D:\Desktop\Net Project\Chat\Chat\ChatClient\bin\Debug\ChatClient.exe
+D:\Desktop\Net Project\Chat\Chat\ChatClient\bin\Debug\ChatClient.pdb
+D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.ClientForm.resources
+D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.Properties.Resources.resources
+D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.csproj.GenerateResource.Cache
+D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.exe
+D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.pdb
+D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.csprojResolveAssemblyReference.cache
