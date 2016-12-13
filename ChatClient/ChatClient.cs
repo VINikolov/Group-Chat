@@ -16,22 +16,41 @@ namespace ChatClient
         private Thread messageReceiver;
         private bool clientClose = false;
 
-        public ChatClient(string clientName, ClientForm form)
+        public ChatClient(string username, string password, string serverIP, ClientForm form, MessageTypes messageType)
         {
-            try
+            client = new TcpClient(serverIP, 3333);
+
+            string message = messageType.ToString() + " " + username + " " + password;
+            string serverMessage = SendInitialMessageToServer(message);
+
+            if (serverMessage.Equals(MessageTypes.LoginSuccessful.ToString()) || 
+                serverMessage.Equals(MessageTypes.RegistrationSuccessful.ToString()))
             {
-                Name = clientName;
-                client = new TcpClient("127.0.0.1", 3333);
+                Name = username;
                 messageReceiver = new Thread(new ParameterizedThreadStart(ReceiveMessages));
                 messageReceiver.Start(form);
                 form.WriteMessage("Connected to server!");
-                form.AddUser(clientName);
+                form.AddUser(username);
             }
-            catch (System.Net.Sockets.SocketException)
+            else
             {
                 client = null;
-                form.WriteMessage("No active server!");
+                throw new Exception();
             }
+        }
+
+        private string SendInitialMessageToServer(string message)
+        {
+            NetworkStream clientDataStream = client.GetStream();
+            byte[] buffer = new byte[4096];
+            buffer = Encoding.ASCII.GetBytes(message);
+            clientDataStream.Write(buffer, 0, message.Length);
+
+            byte[] bytesRead = new byte[4096];
+            NetworkStream clientStream = client.GetStream();
+            int bytesCount = clientStream.Read(bytesRead, 0, 4096);
+            ASCIIEncoding encoding = new ASCIIEncoding();
+            return encoding.GetString(bytesRead, 0, bytesCount);
         }
 
         public void ReceiveMessages(object formObj)

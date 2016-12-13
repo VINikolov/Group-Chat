@@ -7,3 +7,4 @@ D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.csproj.Generate
 D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.exe
 D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.pdb
 D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.csprojResolveAssemblyReference.cache
+D:\Desktop\Net Project\Chat\Chat\ChatClient\obj\Debug\ChatClient.LoginForm.resources

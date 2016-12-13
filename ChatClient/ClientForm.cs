@@ -15,10 +15,12 @@ namespace ChatClient
 
     public partial class ClientForm : Form
     {
-        ChatClient client;
+        public ChatClient Client { get; set; }
+        private LoginForm loginForm;
 
-        public ClientForm()
+        public ClientForm(LoginForm loginForm)
         {
+            this.loginForm = loginForm as LoginForm;
             InitializeComponent();
         }
 
@@ -41,41 +43,25 @@ namespace ChatClient
 
         private void SendMessageButton_Click(object sender, EventArgs e)
         {
-            string message = client.Name + " > " + MessageTextBox.Text;
+            string message = Client.Name + " > " + MessageTextBox.Text;
             MessageTextBox.Clear();
-            client.SendMessage(message);
+            Client.SendMessage(message);
             message = "";
         }
 
         private void ClientForm_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void ConnectButton_Click(object sender, EventArgs e)
-        {
-            string clientName = ClientName.Text;
-            if (clientName.Equals(String.Empty))
-            {
-                NameWarningLabel.Visible = true;
-            }
-            else
-            {
-                NameWarningLabel.Visible = false;
-                client = new ChatClient(clientName, this);
-                string initialMessage = MessageTypes.InitialMessage.ToString() + " " + clientName;
-                client.SendMessage(initialMessage);
-            }
-        }
+        }     
 
         private void DisconnectButton_Click(object sender, EventArgs e)
         {
             MessageTextBox.Clear();
             MessageBox.Items.Add("Disconnected from server!");
             string message = MessageTypes.ExitMessage.ToString();
-            client.SendMessage(message);
+            Client.SendMessage(message);
             ConnectedUsers.Items.Clear();
-            client.Close();
+            Client.Close();
         }
 
         public void AddUser(string clientName)
@@ -98,6 +84,11 @@ namespace ChatClient
         public void RemoveUser(string name)
         {
             ConnectedUsers.Items.Remove(name);
+        }
+
+        private void ClientForm_Closing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
