@@ -30,7 +30,8 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.ServerErrorLabel = new System.Windows.Forms.Label();
+            this.ServerIPLogText = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.FailedLoginLabel = new System.Windows.Forms.Label();
             this.LoginButton = new System.Windows.Forms.Button();
@@ -49,7 +50,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.ServerErrorLabel = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -69,7 +69,7 @@
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.ServerErrorLabel);
-            this.tabPage1.Controls.Add(this.textBox1);
+            this.tabPage1.Controls.Add(this.ServerIPLogText);
             this.tabPage1.Controls.Add(this.label6);
             this.tabPage1.Controls.Add(this.FailedLoginLabel);
             this.tabPage1.Controls.Add(this.LoginButton);
@@ -85,12 +85,23 @@
             this.tabPage1.Text = "Login";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // ServerErrorLabel
             // 
-            this.textBox1.Location = new System.Drawing.Point(218, 133);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(202, 31);
-            this.textBox1.TabIndex = 8;
+            this.ServerErrorLabel.AutoSize = true;
+            this.ServerErrorLabel.ForeColor = System.Drawing.Color.DarkRed;
+            this.ServerErrorLabel.Location = new System.Drawing.Point(8, 179);
+            this.ServerErrorLabel.Name = "ServerErrorLabel";
+            this.ServerErrorLabel.Size = new System.Drawing.Size(174, 25);
+            this.ServerErrorLabel.TabIndex = 1;
+            this.ServerErrorLabel.Text = "No active server!";
+            this.ServerErrorLabel.Visible = false;
+            // 
+            // ServerIPLogText
+            // 
+            this.ServerIPLogText.Location = new System.Drawing.Point(218, 133);
+            this.ServerIPLogText.Name = "ServerIPLogText";
+            this.ServerIPLogText.Size = new System.Drawing.Size(202, 31);
+            this.ServerIPLogText.TabIndex = 8;
             // 
             // label6
             // 
@@ -266,17 +277,6 @@
             this.label3.TabIndex = 0;
             this.label3.Text = "username";
             // 
-            // ServerErrorLabel
-            // 
-            this.ServerErrorLabel.AutoSize = true;
-            this.ServerErrorLabel.ForeColor = System.Drawing.Color.DarkRed;
-            this.ServerErrorLabel.Location = new System.Drawing.Point(8, 179);
-            this.ServerErrorLabel.Name = "ServerErrorLabel";
-            this.ServerErrorLabel.Size = new System.Drawing.Size(174, 25);
-            this.ServerErrorLabel.TabIndex = 1;
-            this.ServerErrorLabel.Text = "No active server!";
-            this.ServerErrorLabel.Visible = false;
-            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,7 +314,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label FailedLoginLabel;
         private System.Windows.Forms.Label PasswordWarningLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox ServerIPLogText;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox ServerIPAddressText;
         private System.Windows.Forms.Label label7;

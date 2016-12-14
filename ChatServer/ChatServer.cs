@@ -19,7 +19,8 @@ namespace ChatServer
 
         public ChatServer(ServerForm form)
         {
-            server = new TcpListener(IPAddress.Any, 3333);
+            var ipAddress = IPAddress.Parse("127.0.0.1");
+            server = new TcpListener(ipAddress, 3333);
             listenerThread = new Thread(new ParameterizedThreadStart(ListenForClients));
             listenerThread.Start(form);
             connectedUsers = new Dictionary<string, TcpClient>();
@@ -74,16 +75,6 @@ namespace ChatServer
                 ASCIIEncoding encoding = new ASCIIEncoding();
                 string message = encoding.GetString(buffer, 0, bytesRead);
 
-                //if (IsInitialMessage(message))
-                //{
-                //    clientName = message.Substring(message.IndexOf(' ') + 1);
-                //    string text = clientName + " connected.";
-                //    form.UpdateServerInfo(text);
-
-                //    SendInitialData(tcpClient, clientName);
-
-                //    connectedUsers.Add(clientName, tcpClient);
-                //}
                 if (IsExitMessage(message))
                 {
                     HandleUserDisconnect(clientName, form);

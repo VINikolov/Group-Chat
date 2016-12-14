@@ -18,7 +18,10 @@ namespace ChatClient
 
         public ChatClient(string username, string password, string serverIP, ClientForm form, MessageTypes messageType)
         {
-            client = new TcpClient(serverIP, 3333);
+            var ipAddress = IPAddress.Parse(serverIP);
+            IPEndPoint endPoint = new IPEndPoint(ipAddress, 3333);
+            client = new TcpClient();
+            client.Connect(endPoint);
 
             string message = messageType.ToString() + " " + username + " " + password;
             string serverMessage = SendInitialMessageToServer(message);

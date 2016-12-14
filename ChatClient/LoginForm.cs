@@ -30,7 +30,7 @@ namespace ChatClient
             string username = UsernameLoginText.Text;
             string password = PasswordLoginText.Text;
 
-            string serverIPAddress = ServerIPAddressText.Text;
+            string serverIPAddress = ServerIPLogText.Text;
             try
             {
                 client = new ChatClient(username, password, serverIPAddress, clientForm, MessageTypes.LoginMessage);
